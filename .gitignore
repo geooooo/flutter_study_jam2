@@ -1,0 +1,13 @@
+# Files and directories created by pub
+client/.dart_tool/
+.packages
+
+# Conventional directory for build outputs
+build/
+
+# Directory created by dartdoc
+doc/api/
+
+# Other
+.DS_Store
+.idea
