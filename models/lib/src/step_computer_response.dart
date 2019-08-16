@@ -5,8 +5,9 @@ class StepComputerResponse implements Serializable {
   int row;
   int col;
   bool isWin;
+  bool isFull;
 
-  StepComputerResponse({this.row, this.col, this.isWin});
+  StepComputerResponse({this.row, this.col, this.isWin, this.isFull});
 
   @override
   factory StepComputerResponse.fromJson(String data) {
@@ -15,6 +16,7 @@ class StepComputerResponse implements Serializable {
       row: mapData['row'] as int,
       col: mapData['col'] as int,
       isWin: mapData['isWin'] as bool,
+      isFull: mapData['isFull'] as bool,
     );
   }
 
@@ -23,5 +25,6 @@ class StepComputerResponse implements Serializable {
     'row': row,
     'col': col,
     'isWin': isWin,
+    'isFull': isFull,
   });
 }

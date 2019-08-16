@@ -6,7 +6,7 @@ import 'package:server/server.dart';
 
 final logic = Logic();
 
-void main() async {
+Future<void> main() async {
   final port = 8081;
   final server = await runServer(port);
   print('Server run on port: $port');
@@ -64,10 +64,11 @@ StepHumanResponse stepHuman(body) {
   final row = requestData.row;
   final col = requestData.col;
 
-  final isWin = logic.stepHuman(row, col);
+  final result = logic.stepHuman(row, col);
 
   return StepHumanResponse(
-    isWin: isWin,
+    isWin: result['isWin'],
+    isFull: result['isFull'],
   );
 }
 
@@ -78,5 +79,6 @@ StepComputerResponse stepComputer(body) {
     row: result['row'],
     col: result['col'],
     isWin: result['isWin'],
+    isFull: result['isFull'],
   );
 }

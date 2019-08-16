@@ -105,11 +105,18 @@ class Game {
     // Сообщить серверу о ходе игрока
     final response = await http_api.stepHuman(row, col);
     final isWin = response.isWin;
+    final isFull = response.isFull;
 
     // Проверка игровой ситуации на победу
     if (isWin) {
       // Победа одного из игроков
       win();
+      return;
+    }
+
+    // Проверка на ничью
+    if (isFull) {
+      draw();
       return;
     }
 
@@ -126,6 +133,7 @@ class Game {
 
     final response = await http_api.stepComputer();
     final isWin = response.isWin;
+    final isFull = response.isFull;
     final row = response.row;
     final col = response.col;
 
@@ -135,6 +143,12 @@ class Game {
     if (isWin) {
       // Победа одного из игроков
       win();
+      return;
+    }
+
+    // Проверка на ничью
+    if (isFull) {
+      draw();
       return;
     }
 
@@ -163,6 +177,11 @@ class Game {
         window.alert('Победил ${Player.computer}');
         break;
     }
+  }
+
+  // Ничья
+  void draw() {
+    window.alert('Победила дружба :)');
   }
 
   // Установка маркера на игровом поле: крестик или нолик
