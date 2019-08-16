@@ -1,0 +1,9 @@
+name: server
+description: server for study jam application
+environment:
+  sdk: '>=2.2.0 <3.0.0'
+
+dependencies:
+  ansicolor: ^1.0.2
+  models:
+    path: ../models

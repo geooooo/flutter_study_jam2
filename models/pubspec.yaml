@@ -1,0 +1,8 @@
+name: models
+description: models for study jam application
+environment:
+  sdk: '>=2.2.0 <3.0.0'
+
+dependencies:
+  server:
+    path: ../server
