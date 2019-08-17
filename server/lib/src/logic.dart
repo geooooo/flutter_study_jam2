@@ -12,7 +12,7 @@ class Logic {
   // ###
   // ###
   // ###
-  List<String> field = [];
+  List<List<String>> field = [];
   // Размер игрового поля
   int fieldSize;
 
@@ -49,7 +49,7 @@ class Logic {
         break;
     }
 
-    field[row] = field[row].substring(0, col) + marker + field[row].substring(col + 1, fieldSize);
+    field[row][col] = marker;
     printField();
   }
 
@@ -60,8 +60,13 @@ class Logic {
     // Очистка поля и заполнения пустыми значениями
     field.clear();
     for (var i = 0; i < fieldSize; i++) {
-      field.add(FieldMarker.empty * fieldSize);
+      field.add([]);
+      for (var j = 0; j < fieldSize; j++) {
+        field[i].add(FieldMarker.empty);
+      }
     }
+
+    printField();
 
     // Определяем и возвращаем игрока, который будет ходить первым
     return firstStepPlayer;
@@ -70,6 +75,7 @@ class Logic {
   // Ход игрока
   Map<String, Object> stepHuman(int row, int col) {
     setFieldMarker(row, col, Player.human);
+    printField();
     return {
       'isWin': checkWin(Player.human),
       'isFull': checkFull(),
@@ -80,6 +86,7 @@ class Logic {
   Map<String, Object> stepComputer() {
     int row = 0;
     int col = 0;
+
 
     setFieldMarker(row, col, Player.computer);
 
@@ -98,6 +105,18 @@ class Logic {
 
   // Проверка полного заполнения игрового поля
   bool checkFull() {
-    return false;
+    var isFull = true;
+
+    OUTER:
+    for (var i = 0; i < field.length; i++) {
+      for (var j = 0; j < field[i].length; j++) {
+        if (field[i][j] == FieldMarker.empty) {
+          isFull = false;
+          break OUTER;
+        }
+      }
+    }
+
+    return isFull;
   }
 }
